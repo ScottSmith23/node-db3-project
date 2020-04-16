@@ -35,13 +35,11 @@ function add(scheme) {
         })
 }
 
-function addStep(step, id) {
+function addStep(stepData, id) {
+
     return db('steps')
-    .where("scheme_id", id)
-    .insert(step)
-    .then(([id]) => {
-        return findSteps(id);
-    })
+    .insert(stepData,"step_number")
+    .then(ids => ({ id: ids[0] }));
   }
 
 function update(changes,id) {
